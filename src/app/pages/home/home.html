@@ -1,0 +1,143 @@
+<div class="home-container">
+  <!-- Banner Hero informativo -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">🎮 Simulatore Ufficiale eSport</div>
+      <h1 class="hero-title">Sfida i tuoi compagni con <span class="highlight">Campus Bet</span></h1>
+      <p class="hero-subtitle">
+        Consulta le quote simulate, piazza i tuoi pronostici con crediti virtuali gratuiti
+        e scala la classifica della community!
+      </p>
+
+      <div class="hero-actions">
+        <a routerLink="/tornei" class="btn-primary">Esplora Tornei</a>
+        <a routerLink="/miei-pronostici" class="btn-secondary">I Miei Pronostici</a>
+      </div>
+    </div>
+
+    <!-- Card Saldo Virtuale Utente -->
+    <div class="wallet-card">
+      <div class="wallet-header">
+        <img [src]="utente().avatar" [alt]="utente().username" class="user-avatar" />
+        <div>
+          <span class="wallet-user-label">Utente attivo</span>
+          <h3 class="wallet-username">{{ utente().username }}</h3>
+        </div>
+      </div>
+
+      <div class="wallet-balance-box">
+        <span class="balance-title">Saldo Virtuale</span>
+        <div class="balance-value">
+          <span class="coin-icon">🪙</span>
+          <span class="coins">{{ utente().crediti }}</span>
+          <span class="coin-unit">crediti</span>
+        </div>
+      </div>
+
+      <div class="wallet-stats">
+        <div>
+          <span class="stat-num">{{ utente().pronosticiEffettuati }}</span>
+          <span class="stat-lbl">Giocati</span>
+        </div>
+        <div>
+          <span class="stat-num">{{ utente().pronosticiVinti }}</span>
+          <span class="stat-lbl">Vinti</span>
+        </div>
+        <div>
+          <span class="stat-num">
+            {{ utente().pronosticiEffettuati > 0 ? (utente().pronosticiVinti / utente().pronosticiEffettuati * 100).toFixed(0) : 0 }}%
+          </span>
+          <span class="stat-lbl">Winrate</span>
+        </div>
+      </div>
+
+      <a routerLink="/profilo" class="btn-wallet">Gestisci Profilo e Saldo &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Prossimi Incontri -->
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">⚡ Prossimi Incontri in Programma</h2>
+        <p class="section-subtitle">Scegli la tua squadra e punta prima che l'incontro abbia inizio</p>
+      </div>
+      <a routerLink="/tornei" class="link-all">Tutti i tornei &rarr;</a>
+    </div>
+
+    <div class="grid-partite">
+      @for (partita of prossimiIncontri(); track partita.id) {
+        <app-partita-card [partita]="partita" />
+      } @empty {
+        <div class="empty-box">
+          <p>Nessun incontro in programma al momento. Controlla la sezione Admin per simulare o programmare partite!</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Tornei in Evidenza -->
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">🏆 Tornei in Evidenza</h2>
+        <p class="section-subtitle">Le migliori competizioni eSport universitarie</p>
+      </div>
+      <a routerLink="/tornei" class="link-all">Visualizza tutti &rarr;</a>
+    </div>
+
+    <div class="grid-tornei">
+      @for (torneo of torneiInEvidenza(); track torneo.id) {
+        <app-torneo-card [torneo]="torneo" />
+      } @empty {
+        <p>Nessun torneo in evidenza.</p>
+      }
+    </div>
+  </section>
+
+  <!-- Classifica & Come funziona -->
+  <div class="dual-section">
+    <!-- Mini Classifica -->
+    <div class="classifica-widget">
+      <div class="widget-header">
+        <h3 class="widget-title">🥇 Top 3 Classifica</h3>
+        <a routerLink="/classifica" class="link-all">Vedi completa &rarr;</a>
+      </div>
+
+      <div class="podio">
+        @for (u of topClassifica(); track u.id; let i = $index) {
+          <div class="podio-item" [class.primo]="i === 0">
+            <span class="rank-badge">#{{ i + 1 }}</span>
+            <img [src]="u.avatar" [alt]="u.username" class="podio-avatar" />
+            <div class="podio-info">
+              <span class="podio-name">{{ u.username }}</span>
+              <span class="podio-vinti">{{ u.pronosticiVinti }} vinti</span>
+            </div>
+            <div class="podio-crediti">
+              🪙 {{ u.crediti }}
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Guida Come Funziona -->
+    <div class="how-it-works-widget">
+      <h3 class="widget-title">ℹ️ Come funziona il simulatore</h3>
+      <ol class="steps-list">
+        <li>
+          <strong>1. Consulta le quote</strong>
+          <span>Scegli una partita aperta tra Rocket League, Valorant, LoL o FC.</span>
+        </li>
+        <li>
+          <strong>2. Effettua il pronostico</strong>
+          <span>Inserisci l'importo in crediti virtuali gratuiti (nessun denaro reale!).</span>
+        </li>
+        <li>
+          <strong>3. Scala la classifica</strong>
+          <span>A partita conclusa, se indovini ricevi i crediti vinti nel tuo wallet!</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,221 @@
+.pronostici-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.page-header {
+  border-bottom: 1px solid #334155;
+  padding-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+}
+
+.page-subtitle {
+  color: #94a3b8;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stat-card.highlight {
+  border-color: #6366f1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: white;
+}
+
+.stat-value.win {
+  color: #10b981;
+}
+
+.stat-value.loss {
+  color: #ef4444;
+}
+
+.stat-value.gold {
+  color: #fbbf24;
+}
+
+/* Tabs */
+.tabs-container {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 0.75rem;
+}
+
+.tab-btn {
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: white;
+  background: #1e293b;
+}
+
+.tab-btn.active {
+  background: #6366f1;
+  color: white;
+}
+
+/* Table */
+.table-wrapper {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.pronostici-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.pronostici-table th {
+  background: #0f172a;
+  padding: 1rem;
+  color: #94a3b8;
+  font-weight: 600;
+  border-bottom: 1px solid #334155;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.pronostici-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+.pronostici-table tr:last-child td {
+  border-bottom: none;
+}
+
+.col-date {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.col-match {
+  font-weight: 600;
+}
+
+.match-link {
+  color: #f8fafc;
+  text-decoration: none;
+}
+
+.match-link:hover {
+  color: #818cf8;
+  text-decoration: underline;
+}
+
+.choice-badge {
+  background: #0f172a;
+  border: 1px solid #334155;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.col-num {
+  font-weight: 700;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-pill.in_attesa {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.status-pill.vinto {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.status-pill.perso {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.col-payout {
+  font-weight: 800;
+}
+
+.payout.win {
+  color: #10b981;
+}
+
+.payout.loss {
+  color: #ef4444;
+}
+
+.payout.pending {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.empty-table {
+  text-align: center;
+  padding: 3rem !important;
+  color: #94a3b8;
+}
+
+.link-inline {
+  display: block;
+  margin-top: 0.5rem;
+  color: #818cf8;
+  font-weight: 600;
+}

@@ -1,0 +1,117 @@
+.torneo-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.torneo-card:hover {
+  transform: translateY(-3px);
+  border-color: #8b5cf6;
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.2);
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.torneo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.torneo-card:hover .torneo-img {
+  transform: scale(1.05);
+}
+
+.badge-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #475569;
+  color: white;
+  backdrop-filter: blur(4px);
+}
+
+.badge-status.in-corso {
+  background: #10b981;
+}
+
+.badge-status.concluso {
+  background: #64748b;
+}
+
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.game-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #818cf8;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.torneo-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 0.5rem 0;
+}
+
+.torneo-desc {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.torneo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  padding: 0.75rem 0;
+  border-top: 1px solid #334155;
+  margin-bottom: 1rem;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+.btn-dettagli {
+  display: block;
+  text-align: center;
+  background: #334155;
+  color: #f8fafc;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-dettagli:hover {
+  background: #8b5cf6;
+  color: white;
+}

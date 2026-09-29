@@ -1,0 +1,101 @@
+<div class="pronostici-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">📋 I Miei Pronostici</h1>
+      <p class="page-subtitle">Riepilogo delle tue giocate attive e dello storico scommesse</p>
+    </div>
+  </div>
+
+  <!-- Statistiche veloci in alto -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-label">Totale Scommesso</span>
+      <span class="stat-value">🪙 {{ totaleGiocato() }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Totale Incassato</span>
+      <span class="stat-value win">🪙 {{ totaleIncassato() }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Bilancio Netto</span>
+      <span class="stat-value" [class.win]="bilancioNetto() >= 0" [class.loss]="bilancioNetto() < 0">
+        {{ bilancioNetto() >= 0 ? '+' : '' }}{{ bilancioNetto() }}
+      </span>
+    </div>
+    <div class="stat-card highlight">
+      <span class="stat-label">Saldo Disponibile</span>
+      <span class="stat-value gold">🪙 {{ utente().crediti }}</span>
+    </div>
+  </div>
+
+  <!-- Filtro stati pronostici -->
+  <div class="tabs-container">
+    <button class="tab-btn" [class.active]="filtroStato() === 'tutti'" (click)="impostaFiltro('tutti')">
+      Tutti
+    </button>
+    <button class="tab-btn" [class.active]="filtroStato() === 'in_attesa'" (click)="impostaFiltro('in_attesa')">
+      In Attesa
+    </button>
+    <button class="tab-btn" [class.active]="filtroStato() === 'vinto'" (click)="impostaFiltro('vinto')">
+      Vinti
+    </button>
+    <button class="tab-btn" [class.active]="filtroStato() === 'perso'" (click)="impostaFiltro('perso')">
+      Persi
+    </button>
+  </div>
+
+  <!-- Tabella pronostici -->
+  <div class="table-wrapper">
+    <table class="pronostici-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Partita</th>
+          <th>Pronostico</th>
+          <th>Quota</th>
+          <th>Importo</th>
+          <th>Stato</th>
+          <th>Risultato / Vincita</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of pronosticiUtente(); track p.id) {
+          <tr>
+            <td class="col-date">{{ p.data }}</td>
+            <td class="col-match">
+              <a [routerLink]="['/partite', p.partitaId]" class="match-link">
+                {{ p.partitaTitolo }}
+              </a>
+            </td>
+            <td>
+              <span class="choice-badge">{{ p.sceltaLabel }}</span>
+            </td>
+            <td class="col-num">{{ p.quota.toFixed(2) }}</td>
+            <td class="col-num">🪙 {{ p.importo }}</td>
+            <td>
+              <span class="status-pill" [class]="p.stato">
+                {{ p.stato === 'in_attesa' ? 'In attesa' : (p.stato === 'vinto' ? 'Vinto' : 'Perso') }}
+              </span>
+            </td>
+            <td class="col-payout">
+              @if (p.stato === 'vinto') {
+                <span class="payout win">+{{ p.vincitaOttenuta }}</span>
+              } @else if (p.stato === 'perso') {
+                <span class="payout loss">-{{ p.importo }}</span>
+              } @else {
+                <span class="payout pending">Pot. +{{ p.potenzialeVincita }}</span>
+              }
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="empty-table">
+              Nessun pronostico presente in questa categoria.
+              <a routerLink="/" class="link-inline">Piazza il tuo primo pronostico!</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

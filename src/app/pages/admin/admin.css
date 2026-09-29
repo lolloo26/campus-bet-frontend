@@ -1,0 +1,217 @@
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+}
+
+.page-subtitle {
+  color: #94a3b8;
+  margin: 0.5rem 0 0 0;
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+.strapi-status-badge {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 9999px;
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f59e0b;
+}
+
+.strapi-status-badge.connected .status-dot {
+  background: #10b981;
+}
+
+.btn-retry {
+  background: #334155;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.log-banner {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid #10b981;
+  color: #34d399;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Action Card */
+.action-card-highlight {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, #1e293b 100%);
+  border: 1px solid #6366f1;
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.action-text {
+  max-width: 600px;
+}
+
+.action-text h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.action-text p {
+  color: #cbd5e1;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.btn-simula-all {
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-simula-all:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+}
+
+/* Matches Management */
+.matches-management-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0.25rem 0 1.25rem 0;
+}
+
+.matches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.match-row {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.match-row.closed {
+  opacity: 0.75;
+}
+
+.match-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.game-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #818cf8;
+  text-transform: uppercase;
+}
+
+.match-teams {
+  color: white;
+  font-size: 1rem;
+}
+
+.match-status {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.btn-group-outcomes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-outcome {
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  color: #e2e8f0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outcome:hover {
+  background: #334155;
+  border-color: #818cf8;
+  color: white;
+}
+
+.badge-done {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.85rem;
+}

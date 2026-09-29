@@ -1,0 +1,126 @@
+.tornei-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.page-header {
+  border-bottom: 1px solid #334155;
+  padding-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 0;
+}
+
+.page-subtitle {
+  color: #94a3b8;
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+}
+
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: #1e293b;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #334155;
+}
+
+.filter-games {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.pills-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pill-btn {
+  background: #0f172a;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  border-radius: 9999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pill-btn:hover {
+  border-color: #818cf8;
+  color: white;
+}
+
+.pill-btn.active {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+}
+
+.filter-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.select-input {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: #818cf8;
+}
+
+.tornei-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background: #1e293b;
+  border: 1px dashed #334155;
+  border-radius: 12px;
+  color: #94a3b8;
+}
+
+.btn-reset {
+  margin-top: 1rem;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  font-weight: 600;
+}

@@ -1,0 +1,100 @@
+<div class="classifica-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">🏆 Classifica Generale e Amici</h1>
+      <p class="page-subtitle">Confronta i tuoi risultati con i compagni del corso ITS</p>
+    </div>
+
+    <!-- Toggle ordinamento -->
+    <div class="sort-toggle">
+      <button
+        class="toggle-btn"
+        [class.active]="ordinamento() === 'crediti'"
+        (click)="impostaOrdinamento('crediti')"
+      >
+        🪙 Per Crediti
+      </button>
+      <button
+        class="toggle-btn"
+        [class.active]="ordinamento() === 'winrate'"
+        (click)="impostaOrdinamento('winrate')"
+      >
+        🎯 Per % Vittorie
+      </button>
+    </div>
+  </div>
+
+  <!-- Podio Top 3 -->
+  <div class="podium-grid">
+    @if (classificaOrdinata().length >= 3) {
+      <!-- 2° Posto -->
+      <div class="podium-card rank-2">
+        <span class="podium-medal">🥈 2° Posto</span>
+        <img [src]="classificaOrdinata()[1].avatar" [alt]="classificaOrdinata()[1].username" class="podium-img" />
+        <h3 class="podium-name">{{ classificaOrdinata()[1].username }}</h3>
+        <span class="podium-coins">🪙 {{ classificaOrdinata()[1].crediti }}</span>
+        <span class="podium-sub">{{ classificaOrdinata()[1].pronosticiVinti }} vinti su {{ classificaOrdinata()[1].pronosticiEffettuati }}</span>
+      </div>
+
+      <!-- 1° Posto -->
+      <div class="podium-card rank-1">
+        <span class="podium-medal">👑 1° Posto</span>
+        <img [src]="classificaOrdinata()[0].avatar" [alt]="classificaOrdinata()[0].username" class="podium-img large" />
+        <h3 class="podium-name large">{{ classificaOrdinata()[0].username }}</h3>
+        <span class="podium-coins large">🪙 {{ classificaOrdinata()[0].crediti }}</span>
+        <span class="podium-sub">{{ classificaOrdinata()[0].pronosticiVinti }} vinti su {{ classificaOrdinata()[0].pronosticiEffettuati }}</span>
+      </div>
+
+      <!-- 3° Posto -->
+      <div class="podium-card rank-3">
+        <span class="podium-medal">🥉 3° Posto</span>
+        <img [src]="classificaOrdinata()[2].avatar" [alt]="classificaOrdinata()[2].username" class="podium-img" />
+        <h3 class="podium-name">{{ classificaOrdinata()[2].username }}</h3>
+        <span class="podium-coins">🪙 {{ classificaOrdinata()[2].crediti }}</span>
+        <span class="podium-sub">{{ classificaOrdinata()[2].pronosticiVinti }} vinti su {{ classificaOrdinata()[2].pronosticiEffettuati }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- Tabella Classifica Completa -->
+  <div class="table-card">
+    <table class="leaderboard-table">
+      <thead>
+        <tr>
+          <th class="col-rank">Pos.</th>
+          <th>Utente</th>
+          <th class="col-center">Giocati</th>
+          <th class="col-center">Vinti</th>
+          <th class="col-center">% Vittorie</th>
+          <th class="col-right">Crediti Virtuali</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (u of classificaOrdinata(); track u.id; let i = $index) {
+          <tr [class.current-user]="u.username === utente().username">
+            <td class="col-rank">
+              <span class="rank-number" [class.top3]="i < 3">#{{ i + 1 }}</span>
+            </td>
+            <td class="col-user">
+              <div class="user-cell">
+                <img [src]="u.avatar" [alt]="u.username" class="table-avatar" />
+                <span class="username-text">{{ u.username }}</span>
+                @if (u.username === utente().username) {
+                  <span class="you-badge">Tu</span>
+                }
+              </div>
+            </td>
+            <td class="col-center">{{ u.pronosticiEffettuati }}</td>
+            <td class="col-center text-win">{{ u.pronosticiVinti }}</td>
+            <td class="col-center">
+              {{ u.pronosticiEffettuati > 0 ? (u.pronosticiVinti / u.pronosticiEffettuati * 100).toFixed(0) : 0 }}%
+            </td>
+            <td class="col-right text-gold">
+              <strong>🪙 {{ u.crediti }}</strong>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

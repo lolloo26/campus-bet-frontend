@@ -1,0 +1,47 @@
+<div class="tornei-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">🏆 Tornei e Competizioni</h1>
+      <p class="page-subtitle">Scegli il torneo, consulta il calendario e scopri le squadre in gara</p>
+    </div>
+  </div>
+
+  <!-- Barra filtri -->
+  <div class="filter-bar">
+    <div class="filter-games">
+      <span class="filter-label">Filtra per Gioco:</span>
+      <div class="pills-container">
+        @for (g of giochiDisponibili; track g) {
+          <button
+            class="pill-btn"
+            [class.active]="giocoFiltro() === g"
+            (click)="impostaGioco(g)"
+          >
+            {{ g === 'tutti' ? 'Tutti i Giochi' : g }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="filter-status">
+      <label for="select-stato" class="filter-label">Stato:</label>
+      <select id="select-stato" class="select-input" (change)="impostaStato($event)">
+        @for (s of statiDisponibili; track s.valore) {
+          <option [value]="s.valore">{{ s.etichetta }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <!-- Griglia tornei -->
+  <div class="tornei-grid">
+    @for (t of torneiFiltrati(); track t.id) {
+      <app-torneo-card [torneo]="t" />
+    } @empty {
+      <div class="empty-state">
+        <p>Nessun torneo trovato con i filtri selezionati.</p>
+        <button class="btn-reset" (click)="impostaGioco('tutti')">Reimposta filtri</button>
+      </div>
+    }
+  </div>
+</div>

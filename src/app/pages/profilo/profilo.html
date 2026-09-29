@@ -1,0 +1,110 @@
+<div class="profilo-page">
+  <div class="page-header">
+    <h1 class="page-title">👤 Profilo & Portafoglio Virtuale</h1>
+    <p class="page-subtitle">Gestisci il tuo conto di gioco simulato, statistiche e compagni di team</p>
+  </div>
+
+  @if (messaggioFeedback(); as msg) {
+    <div class="alert-info">
+      ✨ {{ msg }}
+    </div>
+  }
+
+  <!-- Scheda Utente Principale -->
+  <div class="profile-hero-card">
+    <div class="hero-left">
+      <img [src]="utente().avatar" [alt]="utente().username" class="avatar-large" />
+      <div class="user-details">
+        <div class="rank-tag">Classifica: #{{ posizioneClassifica() }}</div>
+        <h2 class="username">{{ utente().username }}</h2>
+        <span class="account-badge">Account Demo eSport</span>
+      </div>
+    </div>
+
+    <!-- Saldo & Ricarica -->
+    <div class="wallet-balance-container">
+      <span class="wallet-label">Crediti Virtuali Disponibili</span>
+      <div class="balance-display">
+        <span class="coin-symbol">🪙</span>
+        <span class="coin-count">{{ utente().crediti }}</span>
+      </div>
+      <button type="button" class="btn-ricarica" (click)="ricaricaCrediti()">
+        + 500 Crediti Gratuiti
+      </button>
+    </div>
+  </div>
+
+  <!-- Statistiche Dettagliate -->
+  <div class="stats-grid">
+    <div class="stat-box">
+      <span class="stat-label">Crediti Iniziali</span>
+      <span class="stat-number">🪙 {{ utente().creditiIniziali }}</span>
+      <span class="stat-hint">Fondo di partenza standard</span>
+    </div>
+
+    <div class="stat-box">
+      <span class="stat-label">Totale Scommesso</span>
+      <span class="stat-number">🪙 {{ totaleScommesso() }}</span>
+      <span class="stat-hint">Valore cumulativo giocate</span>
+    </div>
+
+    <div class="stat-box">
+      <span class="stat-label">Pronostici Conclusi</span>
+      <span class="stat-number">{{ utente().pronosticiEffettuati }}</span>
+      <span class="stat-hint">Vinti: {{ utente().pronosticiVinti }}</span>
+    </div>
+
+    <div class="stat-box">
+      <span class="stat-label">Percentuale di Successo</span>
+      <span class="stat-number win">{{ winrate() }}%</span>
+      <span class="stat-hint">Rapporto vittorie / giocate</span>
+    </div>
+  </div>
+
+  <!-- Switch Utente (per simulare i compagni di gruppo ITS) -->
+  <div class="switch-user-card">
+    <div class="card-header-simple">
+      <h3>👥 Cambia Utente o Aggiungi Compagno di Corso</h3>
+      <p>Ideale per simulare sfide tra compagni di gruppo ITS</p>
+    </div>
+
+    <div class="accounts-chips">
+      @for (u of classifica(); track u.id) {
+        <button
+          type="button"
+          class="account-chip"
+          [class.active]="u.username === utente().username"
+          (click)="cambiaUtente(u.username)"
+        >
+          <img [src]="u.avatar" [alt]="u.username" class="chip-avatar" />
+          <span>{{ u.username }}</span>
+          <span class="chip-coins">({{ u.crediti }} 🪙)</span>
+        </button>
+      }
+    </div>
+
+    <div class="add-user-row">
+      <input
+        type="text"
+        placeholder="Inserisci un nuovo nome (es. Marco)..."
+        [value]="nuovoNomeInput()"
+        (input)="onNomeInput($event)"
+        class="input-new-user"
+      />
+      <button type="button" class="btn-create-user" (click)="creaNuovoProfilo()">
+        + Crea e Passa a questo Utente
+      </button>
+    </div>
+  </div>
+
+  <!-- Zona Pericolosa / Reset -->
+  <div class="danger-zone-card">
+    <div>
+      <h4>Reimposta Dati di Demo</h4>
+      <p>Ripristina il portafoglio, le partite e i pronostici allo stato iniziale della lezione.</p>
+    </div>
+    <button type="button" class="btn-reset-all" (click)="resetCompleto()">
+      Reset Dati
+    </button>
+  </div>
+</div>

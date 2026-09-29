@@ -1,0 +1,51 @@
+<div class="card" [class.conclusa]="partita().stato === 'conclusa'">
+  <div class="card-header">
+    <span class="badge-game">{{ partita().gioco }}</span>
+    <span class="badge-status" [class.active]="partita().stato === 'programmata'">
+      {{ partita().stato === 'programmata' ? 'In programma' : (partita().stato === 'in_corso' ? 'Live' : 'Conclusa') }}
+    </span>
+  </div>
+
+  <div class="torneo-name">{{ partita().torneoNome }}</div>
+
+  <div class="matchup">
+    <div class="team">
+      <span class="team-name">{{ partita().squadraA }}</span>
+    </div>
+    <div class="versus">
+      @if (partita().stato === 'conclusa' && partita().punteggio) {
+        <span class="punteggio">{{ partita().punteggio }}</span>
+      } @else {
+        <span class="vs-text">VS</span>
+      }
+    </div>
+    <div class="team">
+      <span class="team-name">{{ partita().squadraB }}</span>
+    </div>
+  </div>
+
+  <div class="match-time">
+    📅 {{ partita().dataOra }}
+  </div>
+
+  <div class="quote-grid">
+    <div class="quota-box" [class.vincente]="partita().risultato === '1'">
+      <span class="quota-label">1 ({{ partita().squadraA }})</span>
+      <span class="quota-val">{{ partita().quota1.toFixed(2) }}</span>
+    </div>
+    <div class="quota-box" [class.vincente]="partita().risultato === 'X'">
+      <span class="quota-label">X (Pareggio)</span>
+      <span class="quota-val">{{ partita().quotaX.toFixed(2) }}</span>
+    </div>
+    <div class="quota-box" [class.vincente]="partita().risultato === '2'">
+      <span class="quota-label">2 ({{ partita().squadraB }})</span>
+      <span class="quota-val">{{ partita().quota2.toFixed(2) }}</span>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <a [routerLink]="['/partite', partita().id]" class="btn-visualizza">
+      {{ partita().stato === 'conclusa' ? 'Dettagli incontro' : 'Scommetti ora' }} &rarr;
+    </a>
+  </div>
+</div>

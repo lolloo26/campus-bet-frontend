@@ -1,0 +1,75 @@
+<div class="admin-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">⚙️ Pannello Admin & Simulatore Risultati</h1>
+      <p class="page-subtitle">
+        Modulo di simulazione rapida esiti (Sezione H). Determina casualmente i vincitori o inserisci
+        manualmente il risultato per testare l'accredito dei pronostici in tempo reale.
+      </p>
+    </div>
+
+    <div class="strapi-status-badge" [class.connected]="strapiConnesso()">
+      <span class="status-dot"></span>
+      <span>Strapi API: {{ strapiConnesso() ? 'Connesso (' + strapiUrl() + ')' : 'Offline (Uso Dati Demo)' }}</span>
+      <button type="button" class="btn-retry" (click)="ricaricaDaStrapi()">Riprova</button>
+    </div>
+  </div>
+
+  @if (logMessaggio(); as log) {
+    <div class="log-banner">
+      ⚡ {{ log }}
+    </div>
+  }
+
+  <!-- Azione Rapida Simulazione Globale -->
+  <div class="action-card-highlight">
+    <div class="action-text">
+      <h3>🎲 Calcolo Casuale Risultati (Requisito H)</h3>
+      <p>
+        Genera in modo casuale il punteggio e l'esito (1, X, 2) per tutte le partite attualmente aperte.
+        I pronostici degli utenti verranno istantaneamente verificati e le vincite accreditate.
+      </p>
+    </div>
+    <button type="button" class="btn-simula-all" (click)="simulaTutti()">
+      ⚡ Simula Risultati Casuali Ora
+    </button>
+  </div>
+
+  <!-- Gestione manuale singola partita -->
+  <div class="matches-management-card">
+    <h3 class="card-title">Gestione Singole Partite</h3>
+    <p class="card-subtitle">Assegna un esito specifico per verificare il funzionamento del simulatore</p>
+
+    <div class="matches-list">
+      @for (p of partite(); track p.id) {
+        <div class="match-row" [class.closed]="p.stato === 'conclusa'">
+          <div class="match-info">
+            <span class="game-tag">{{ p.gioco }}</span>
+            <strong class="match-teams">{{ p.squadraA }} vs {{ p.squadraB }}</strong>
+            <span class="match-status">
+              {{ p.stato === 'conclusa' ? 'Conclusa: ' + p.punteggio + ' (Esito ' + p.risultato + ')' : 'In programma' }}
+            </span>
+          </div>
+
+          <div class="match-actions">
+            @if (p.stato !== 'conclusa') {
+              <div class="btn-group-outcomes">
+                <button type="button" class="btn-outcome" (click)="concludiManuale(p.id, '1')">
+                  Vince {{ p.squadraA }} (1)
+                </button>
+                <button type="button" class="btn-outcome" (click)="concludiManuale(p.id, 'X')">
+                  Pareggio (X)
+                </button>
+                <button type="button" class="btn-outcome" (click)="concludiManuale(p.id, '2')">
+                  Vince {{ p.squadraB }} (2)
+                </button>
+              </div>
+            } @else {
+              <span class="badge-done">Refertata ✔️</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

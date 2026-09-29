@@ -1,0 +1,25 @@
+<div class="torneo-card">
+  <div class="image-wrapper">
+    <img [src]="torneo().immagine" [alt]="torneo().nome" class="torneo-img" />
+    <span class="badge-status" [class.in-corso]="torneo().stato === 'in_corso'" [class.concluso]="torneo().stato === 'concluso'">
+      {{ torneo().stato === 'in_corso' ? 'In corso' : (torneo().stato === 'programmato' ? 'Programmato' : 'Concluso') }}
+    </span>
+  </div>
+
+  <div class="card-body">
+    <span class="game-tag">{{ torneo().gioco }}</span>
+    <h3 class="torneo-title">{{ torneo().nome }}</h3>
+    <p class="torneo-desc">{{ torneo().descrizione }}</p>
+
+    <div class="torneo-meta">
+      <span>👥 {{ torneo().numeroPartecipanti }} team</span>
+      <span>📅 {{ torneo().dataInizio }} &rarr; {{ torneo().dataFine }}</span>
+    </div>
+
+    <div class="card-footer">
+      <a [routerLink]="['/tornei', torneo().id]" class="btn-dettagli">
+        Visualizza torneo &rarr;
+      </a>
+    </div>
+  </div>
+</div>

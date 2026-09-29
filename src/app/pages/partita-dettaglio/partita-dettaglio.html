@@ -1,0 +1,167 @@
+<div class="partita-detail-page">
+  <div class="navigation-back">
+    <a routerLink="/" class="link-back">&larr; Torna alla Home</a>
+  </div>
+
+  @if (partita(); as p) {
+    <!-- Scheda Incontro principale -->
+    <div class="match-hero-card">
+      <div class="match-meta-top">
+        <span class="game-badge">{{ p.gioco }}</span>
+        <span class="torneo-label">{{ p.torneoNome }}</span>
+        <span class="status-badge" [class.live]="p.stato === 'in_corso'" [class.ended]="p.stato === 'conclusa'">
+          {{ p.stato === 'programmata' ? 'Programmata' : (p.stato === 'in_corso' ? 'In Corso' : 'Conclusa') }}
+        </span>
+      </div>
+
+      <!-- Scontro visivo tra le due squadre -->
+      <div class="versus-display">
+        <div class="team-side" [class.winner]="p.risultato === '1'">
+          <div class="team-logo-placeholder">🎮</div>
+          <h2 class="team-name">{{ p.squadraA }}</h2>
+          <span class="team-role">Squadra A</span>
+        </div>
+
+        <div class="versus-center">
+          @if (p.stato === 'conclusa' && p.punteggio) {
+            <div class="final-score">{{ p.punteggio }}</div>
+            <span class="score-label">Risultato Finale</span>
+          } @else {
+            <span class="vs-circle">VS</span>
+            <span class="match-time">📅 {{ p.dataOra }}</span>
+          }
+        </div>
+
+        <div class="team-side" [class.winner]="p.risultato === '2'">
+          <div class="team-logo-placeholder">⚡</div>
+          <h2 class="team-name">{{ p.squadraB }}</h2>
+          <span class="team-role">Squadra B</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modulo di scommessa o Risultato finale -->
+    @if (p.stato !== 'conclusa') {
+      <div class="betting-form-card">
+        <div class="form-header">
+          <div>
+            <h3 class="form-title">🎯 Effettua il tuo Pronostico</h3>
+            <p class="form-subtitle">Seleziona l'esito previsto e inserisci l'importo in crediti virtuali</p>
+          </div>
+          <div class="user-balance-pill">
+            <span>Saldo:</span>
+            <strong>🪙 {{ utente().crediti }}</strong>
+          </div>
+        </div>
+
+        <!-- Selettore Quote 1, X, 2 -->
+        <div class="odds-selection-grid">
+          <button
+            type="button"
+            class="odd-btn"
+            [class.selected]="esitoSelezionato() === '1'"
+            (click)="selezionaEsito('1')"
+          >
+            <span class="odd-choice">1 ({{ p.squadraA }})</span>
+            <span class="odd-number">{{ p.quota1.toFixed(2) }}</span>
+          </button>
+
+          <button
+            type="button"
+            class="odd-btn"
+            [class.selected]="esitoSelezionato() === 'X'"
+            (click)="selezionaEsito('X')"
+          >
+            <span class="odd-choice">X (Pareggio)</span>
+            <span class="odd-number">{{ p.quotaX.toFixed(2) }}</span>
+          </button>
+
+          <button
+            type="button"
+            class="odd-btn"
+            [class.selected]="esitoSelezionato() === '2'"
+            (click)="selezionaEsito('2')"
+          >
+            <span class="odd-choice">2 ({{ p.squadraB }})</span>
+            <span class="odd-number">{{ p.quota2.toFixed(2) }}</span>
+          </button>
+        </div>
+
+        <!-- Sezione Importo & Vincita -->
+        <div class="bet-amount-section">
+          <div class="input-group">
+            <label for="importo-bet" class="input-label">Importo da scommettere (crediti):</label>
+            <div class="input-wrapper">
+              <span class="input-prefix">🪙</span>
+              <input
+                id="importo-bet"
+                type="number"
+                min="1"
+                [max]="utente().crediti"
+                [value]="importo()"
+                (input)="onImportoChange($event)"
+                class="amount-input"
+              />
+            </div>
+
+            <!-- Pulsanti rapidi incremento importo -->
+            <div class="quick-amounts">
+              <button type="button" class="quick-btn" (click)="aggiungiImporto(50)">+50</button>
+              <button type="button" class="quick-btn" (click)="aggiungiImporto(100)">+100</button>
+              <button type="button" class="quick-btn" (click)="aggiungiImporto(250)">+250</button>
+              <button type="button" class="quick-btn all-in" (click)="impostaTuttoIlSaldo()">Max (All-in)</button>
+            </div>
+          </div>
+
+          <!-- Riquadro Calcolo Potenziale Vincita -->
+          <div class="potential-payout-box">
+            <span class="payout-label">Potenziale Vincita</span>
+            <div class="payout-amount">
+              🪙 {{ potenzialeVincita() }}
+            </div>
+            <span class="payout-calc">
+              {{ importo() }} &times; Quota {{ quotaSelezionata().toFixed(2) }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Feedback messaggio successo / errore -->
+        @if (messaggio(); as msg) {
+          <div class="alert-box" [class.success]="msg.tipo === 'successo'" [class.error]="msg.tipo === 'errore'">
+            {{ msg.testo }}
+          </div>
+        }
+
+        <!-- Pulsante conferma -->
+        <div class="form-actions">
+          <button
+            type="button"
+            class="btn-confirm-bet"
+            (click)="confermaPronostico()"
+            [disabled]="importo() <= 0 || importo() > utente().crediti"
+          >
+            Conferma Pronostico &rarr;
+          </button>
+        </div>
+      </div>
+    } @else {
+      <!-- Partita conclusa -->
+      <div class="match-concluded-card">
+        <h3>🏁 Partita Conclusa</h3>
+        <p>
+          L'incontro si è concluso con l'esito:
+          <strong>
+            {{ p.risultato === '1' ? p.squadraA : (p.risultato === 'X' ? 'Pareggio' : p.squadraB) }}
+          </strong>
+          ({{ p.punteggio }}). I pronostici relativi a questa sfida sono già stati refertati.
+        </p>
+        <a routerLink="/miei-pronostici" class="btn-check-bets">Controlla i tuoi pronostici &rarr;</a>
+      </div>
+    }
+  } @else {
+    <div class="not-found">
+      <h2>Partita non trovata</h2>
+      <a routerLink="/" class="link-back">Torna alla home</a>
+    </div>
+  }
+</div>

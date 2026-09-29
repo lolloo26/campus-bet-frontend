@@ -1,0 +1,77 @@
+<div class="torneo-detail-page">
+  <div class="navigation-back">
+    <a routerLink="/tornei" class="link-back">&larr; Torna alla lista tornei</a>
+  </div>
+
+  @if (torneo(); as t) {
+    <!-- Header Torneo -->
+    <div class="torneo-hero" [style.backgroundImage]="'linear-gradient(to right, rgba(15,23,42,0.95), rgba(15,23,42,0.75)), url(' + t.immagine + ')'">
+      <div class="hero-text">
+        <span class="badge-game">{{ t.gioco }}</span>
+        <h1 class="hero-title">{{ t.nome }}</h1>
+        <p class="hero-description">{{ t.descrizione }}</p>
+
+        <div class="hero-meta-tags">
+          <span class="meta-tag">📅 {{ t.dataInizio }} &rarr; {{ t.dataFine }}</span>
+          <span class="meta-tag">👥 {{ t.numeroPartecipanti }} Squadre</span>
+          <span class="meta-tag status" [class.in-corso]="t.stato === 'in_corso'">
+            ● {{ t.stato === 'in_corso' ? 'In corso' : (t.stato === 'programmato' ? 'Programmato' : 'Concluso') }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Squadre Partecipanti -->
+    <section class="detail-section">
+      <h2 class="section-title">🛡️ Squadre Partecipanti</h2>
+      <div class="teams-pills-grid">
+        @for (squadra of t.squadre; track squadra) {
+          <div class="team-badge-card">
+            <span class="team-icon">🎮</span>
+            <span class="team-label">{{ squadra }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Pronostici disponibili (Incontri aperti) -->
+    <section class="detail-section">
+      <div class="section-heading-row">
+        <h2 class="section-title">⚡ Pronostici Disponibili</h2>
+        <span class="count-badge">{{ pronosticiDisponibili().length }} incontri aperti</span>
+      </div>
+
+      <div class="matches-grid">
+        @for (partita of pronosticiDisponibili(); track partita.id) {
+          <app-partita-card [partita]="partita" />
+        } @empty {
+          <div class="empty-state">
+            <p>Nessun pronostico aperto al momento per questo torneo.</p>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Risultati conclusi -->
+    @if (partiteConcluse().length > 0) {
+      <section class="detail-section">
+        <div class="section-heading-row">
+          <h2 class="section-title">🏁 Risultati Conclusi</h2>
+          <span class="count-badge">{{ partiteConcluse().length }} incontri disputati</span>
+        </div>
+
+        <div class="matches-grid">
+          @for (partita of partiteConcluse(); track partita.id) {
+            <app-partita-card [partita]="partita" />
+          }
+        </div>
+      </section>
+    }
+  } @else {
+    <div class="not-found">
+      <h2>Torneo non trovato</h2>
+      <p>Il torneo richiesto non esiste o è stato rimosso.</p>
+      <a routerLink="/tornei" class="btn-primary">Torna ai tornei</a>
+    </div>
+  }
+</div>

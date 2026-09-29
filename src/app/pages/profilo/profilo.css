@@ -1,0 +1,319 @@
+.profilo-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-header {
+  border-bottom: 1px solid #334155;
+  padding-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+}
+
+.page-subtitle {
+  color: #94a3b8;
+  margin: 0.5rem 0 0 0;
+}
+
+.alert-info {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid #6366f1;
+  color: #c7d2fe;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Profile Hero Card */
+.profile-hero-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.hero-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #6366f1;
+  background: #0f172a;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rank-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fbbf24;
+  text-transform: uppercase;
+}
+
+.username {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+}
+
+.account-badge {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.wallet-balance-container {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.balance-display {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.coin-symbol {
+  font-size: 1.75rem;
+}
+
+.coin-count {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fbbf24;
+}
+
+.btn-ricarica {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-ricarica:hover {
+  background: #059669;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+}
+
+.stat-number.win {
+  color: #10b981;
+}
+
+.stat-hint {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Switch User Card */
+.switch-user-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card-header-simple h3 {
+  color: white;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.card-header-simple p {
+  color: #94a3b8;
+  margin: 0.25rem 0 0 0;
+  font-size: 0.85rem;
+}
+
+.accounts-chips {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.account-chip {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 9999px;
+  padding: 0.35rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.account-chip:hover {
+  border-color: #818cf8;
+}
+
+.account-chip.active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: white;
+}
+
+.chip-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.chip-coins {
+  font-size: 0.75rem;
+  color: #fbbf24;
+}
+
+.account-chip.active .chip-coins {
+  color: #fef08a;
+}
+
+.add-user-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.input-new-user {
+  flex: 1;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.input-new-user:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.btn-create-user {
+  background: #334155;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-create-user:hover {
+  background: #475569;
+}
+
+/* Danger Zone */
+.danger-zone-card {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.danger-zone-card h4 {
+  color: #f87171;
+  margin: 0 0 0.25rem 0;
+}
+
+.danger-zone-card p {
+  color: #94a3b8;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.btn-reset-all {
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-reset-all:hover {
+  background: #b91c1c;
+}
